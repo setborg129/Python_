@@ -12,18 +12,18 @@ import random
 
 
 #############################################################################################
-def check_1(lst_obj):                               #O(1)                    
+def check_1(lst_obj):                               #O(1)
     """Функция должна создать множество из списка.
     Алгоритм 3:
     Создать множество из списка
     Сложность: !!!.
     """
-    lst_to_set = set(lst_obj)  # O(len)
-    return lst_to_set          # O(1)          
+    lst_to_set = set(lst_obj)  # O(len)           # Исправил
+    return lst_to_set          # O(len)
 
 
 #############################################################################################
-def check_2(lst_obj):                  #O(1)                 
+def check_2(lst_obj):                  # O(n^2)
     """Функция должная вернуть True, если все элементы списка различаются.
     Алгоритм 1:
     Проходимся по списку и для каждого элемента проверяем,
@@ -31,35 +31,36 @@ def check_2(lst_obj):                  #O(1)
     в оставшихся справа элементах
     Сложность: !!!.
     """
-    for j in range(len(lst_obj)):          # O(n)
-        if lst_obj[j] in lst_obj[j+1:]:    # O(1)
-            return False                   # O(1)
-    return True                            # O(1)
+    for j in range(len(lst_obj)):          # O(n)  Линейная сложность
+        if lst_obj[j] in lst_obj[j+1:]:    # O(n)  Линейная сложность
+            return False
+    return True
 
 
 #############################################################################################
-def check_3(lst_obj):                           #O(1)
+def check_3(lst_obj):                           # O(n^2)   линейная  + линейная =  квадратичная
     """Функция должная вернуть True, если все элементы списка различаются.
     Алгоритм 2:
     Вначале выполним для списка сортировку, далее, сравниваем элементы попарно
     Если присутствуют дубли, они будут находиться рядом.
     Сложность: !!!
     """
-    lst_copy = list(lst_obj)                 # O(len)
+    lst_copy = list(lst_obj)                 # O(n)
     lst_copy.sort()                          # O(n len n)
     for i in range(len(lst_obj) - 1):        # O(n)       -1 С последнего
-        if lst_copy[i] == lst_copy[i+1]:     # O(1)
-            return False                     # O(1)
-    return True                              # O(1)
+        if lst_copy[i] == lst_copy[i+1]:     # O(n)
+            return False
+    return True
 
 #############################################################################################
 
 
-for j in (50, 500, 1000, 5000, 10000):               # O(n)   
+for j in (50, 500, 1000, 5000, 10000):              
     # Из 100000 чисел возьмем 'j' случайно выбранных
     # Всего 10 тыс. чисел
-    lst = random.sample(range(-100000, 100000), j)   # O(n) 
+    lst = random.sample(range(-100000, 100000), j)   # O(len)
 
-print(check_1(lst))                         # O(1)
-print(check_2(lst))                         # O(1)                
-print(check_3(lst))                         # O(1)
+print(check_1(lst))                         # O(len)
+print(check_2(lst))                         # O(len)
+print(check_3(lst))                         # O(len)
+
